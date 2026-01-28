@@ -1,8 +1,20 @@
-﻿@{
+﻿@using HelpDeskWebapp.Models
+@model Ticket 
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">first ticket from db content</h1>
+    
+    <div class="card" style="width: 18rem; margin: auto;">
+        <div class="card-body">
+            <h5 class="card-title">title: @Model.Title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">priority: @Model.Priority</h6>
+            <p class="card-text">description: @Model.Description</p>
+            <p class="card-text"><small class="text-muted">creation: @Model.CreatedAt</small></p>
+            
+            <p class="card-text"><small class="text-muted">status: @Model.Status</small></p>
+        </div>
+    </div>
 </div>
