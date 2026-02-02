@@ -48,4 +48,25 @@ public class AccountController : Controller
         }
         return View(model);
     }
+
+    [HttpGet]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        if (ModelState.IsValid) {
+            
+            var res = await SignInManager.PasswordSignInAsync(model.Email, model.Password,false, false);
+
+            if (res.Succeeded) {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        ModelState.AddModelError("", "User not found or wrong password, try again.");
+        return View();
+    }
 }
