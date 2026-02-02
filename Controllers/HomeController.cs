@@ -15,6 +15,7 @@ public class HomeController : Controller
     }
     public IActionResult Index()
     {
+        return RedirectToAction("Register", "Account");
         Ticket t = new Ticket
         {
             Id = 1,
