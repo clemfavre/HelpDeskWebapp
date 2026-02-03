@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HelpDeskWebapp.Models;
 using Microsoft.AspNetCore.Components.Web;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HelpDeskWebapp.Controllers;
 
@@ -28,6 +29,7 @@ public class HomeController : Controller
         return View(context.Tickets.First());
     }
 
+    [Authorize(Roles = "ITsupport")]
     public IActionResult Privacy()
     {
         return View();

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using SQLitePCL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,5 +32,18 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+//seeding db with ITsupport users
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        await DbSeeder.SeedRolesAndAdmin(services);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("error while seeding db: " + ex.Message);
+    }
+}
 
 app.Run();

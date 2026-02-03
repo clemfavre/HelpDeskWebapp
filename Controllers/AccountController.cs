@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HelpDeskWebapp.Models;
 using System.ComponentModel.Design;
 using System.ComponentModel.DataAnnotations;
-//using HelpDeskWebapp.Models.RegisterViewModel;
+using Microsoft.AspNetCore.Authorization;
 
 public class AccountController : Controller
 {
@@ -38,6 +38,7 @@ public class AccountController : Controller
 
             if (res.Succeeded) //checks password requirments from Microsoft
             {
+                await UserManager.AddToRoleAsync(u, "client");
                 return RedirectToAction("Login", "Account");
             }
 
